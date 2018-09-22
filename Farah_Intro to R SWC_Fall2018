@@ -25,8 +25,14 @@ Finally, let's make another folder called  'R_intro' inside `SWC_fall2018` folde
 
 - [x] do it with students and make sure everyone is with you - put up red sticky notes if having problems, green when done with the task.
 
-
+Let's have a look at the data that we are gonna work with today. Let's right click gapminder.txt, click open with, click microsoft excel. 
+So this is a demographic data of some countries in different continents showing statistics of their life expectancy, population 
+and gdp/capita in different years. So this is a big data and we will analyse this set of data now with R.
 Now we are ready to work with R!
+R is a free software programming language for statistical computing and graphics. 
+When you have the RStudio installed besides R, it integrates with R as an IDE (Integrated Developmet Environment) 
+to provide further functionality. 
+You can do without RStudio but it is the product that assists people to use R more effectively.
 
 
 ### Learning objectives
@@ -63,18 +69,41 @@ We will be working with R using RStudio. This is a piece of software (also known
 * Interactive mode. When you type commands in the console window and press 'ENTER', they are executed immediately and the output is displayed. Here are few examples:  
             > 3+5
             > sqrt(64) 
-            > print("How are you?")
+          
             
-    Symbol `>` means that the R is ready for the next command. If you enter incomplete commands, you will see `+` which means that the system is waiting for you to complete the command. You can always press 'Esc' to return to `>` when stuck with `+` at the prompt.
-        
-* Scripting mode. It is often the case that we would like to reuse our commands. If so, you can type commands in the text editor window. Let's open a new R Script file and write our command there, for example `print("Good morning!"`). To check if this command works, you can send it for execution to console with 'CTR +Enter' click. We have a very simple example here, but you can imagine writing hundreds of commands in the order you want them to be executed to accomplish a certain task. This is what an R program or R script is. It is a good practice to comment your code. The comments (statements that are helpful to the user, but are not seen by R as commands to be executed) in R start with `#`. Let's add a comment to our simple script.
+    Symbol `>` means that the R is ready for the next command. If you enter incomplete commands, you will see `+` which means that the 
+    system is waiting for you to complete the command. You can always press 'Esc' to return to `>` when stuck with `+` at the prompt.
+    
+The best thing about R is that it has inbuilt things so you do not have to type a lot
+when you type sq, press tab, it gives you all options of words that start with sq 
+and you gotta select the one you want simply hit tab again or hit enter and you are there
+Another thing is that when you type a parenthesis it automatically gives you both the opening and the closing 
+brackets and it is the same thing with the quotes
+So in the parenthesis type 64, hit enter and the output is your result
+These are all numbers so far we have used, but can you tell R to give you some non-math output?
+  
+  > print("How are you?")
+  > print(64)
+   I have to include characters in quotes, numbers will not need quotes.
+   
+So this sqrt, and print, if you see automatically come with a parenthesis beside it. These are called functions
+Functions need an argument inside the first parenthesis
+   
+* Scripting mode. It is often the case that we would like to reuse our commands. If so, you can type commands in the text editor window. 
+Let's open a new R Script file by clicking the + sign on the top right corner of scripting panel and write our command there, 
+for example `print("Good morning!"`). 
+To check if this command works, you can send it for execution to console with 'CTR +Enter' click. 
+We have a very simple example here, but you can imagine writing hundreds of commands in the order you want them to be executed to 
+accomplish a certain task. This is what an R program or R script is. It is a good practice to comment your code. 
+The comments (statements that are helpful to the user, but are not seen by R as commands to be executed) in R start with `#`. 
+Let's add a comment to our simple script.
 
     ```
     #my first R command 
     print("Good morning")
 
     ```
-    We can save the file with our commands and reuse it later. For now, let's save our example as R_commands.R in R_intro folder.
+    We can save the file with our commands and reuse it later. For now, let's save our example as R_commands.R file in R_intro folder.
     
     - [x] do it with students and make sure everyone is with you - put up red sticky notes if having problems, green when done with the task.
     
@@ -86,6 +115,10 @@ Let's work in scripting mode from now on so that you will have the record of all
 ### Variables/objects
 
 One of the main concepts of any programming language is a notion of a variable. Variables are created to store values for future use.
+Now see if you wanna get the value of 3+5, you have to run the command everytime
+But you can store the value under a variable for future use.
+A variable with a value becomes an object
+
 To create a variable in R, use `<-` (Alt + dash) assignment operator:
 ```
 ### Variables
@@ -98,6 +131,48 @@ print(name)
 price <- 3.99
 print(price)
 
+### working with environment
+#remember what env does? it stores the objects you created. Let's see what the environment tab show us. how to see the list on screen?
+
+#list all objects in your environment
+ls()
+
+#how to remove an object?
+#rm(objectName)
+rm(price)
+
+#remove all objects, clear environment
+rm(list=ls()) 
+```
+### Functions
+
+In general, a function takes an input and transforms it according to the function's definition(rules). 
+You can recognize functions in R by the presence of parantheses. Objects in parantheses are called function's **arguments** 
+```
+#applying square root function
+mass<-64 #is a variable
+sqrt(mass) #function with argument provided
+res<-sqrt(mass) #variable with a function as its value
+In the example, the square root function takes `mass` object as input and finds the square root of its value. The result is then assigned to `res` variable. In our second example, `getwd()` is a function that outputs your current location within the file system. Although there is no input (many functions do not require arguments), parantheses are still required for a proper syntax in R.
+
+#applying getwd() function
+getwd()
+```
+There are thousands of built-in functions in R. 
+There are also help functions that you can use to find out what other function do and how to use them. 
+The help appears in the bottom-right window of the RStudio.
+
+```
+### helpfunctions
+
+?plot
+help(mean)
+
+```
+The functionality of R is expanded by R packages that include functions not present in the default installation of R. 
+When you need to use another package, do these 2 things
+
+```
 ```
 **Challenge 2.1**
     
@@ -119,47 +194,8 @@ As you can see, a variable is assigned a value equal to the value of the evaluat
 * DO NOT START with numbers
 * Names should be MEANINGFUL - help yourself and others to understand your code! 
 
-Every time you assign a value to a variable, you create a new object. You can see what objects you create if you look at the 'Environment' tab of the top-right window of RStudio. The objects you create are in your environment until you remove them. You can manage your environment in the following way:
-```
-### working with environment
-
-#list all objects in your environment
-ls()
-
-#remove object objectName
-rm(objectName)
-
-#remove all objects, clear environment
-rm(list=ls()) 
 ```
 
-### Functions
-
-In general, a function takes an input and transforms it according to the function's definition(rules). You can recognize functions in R by the presence of parantheses. Objects in parantheses are called function's **arguments** 
-```
-### Functions
-
-#applying square root function
-mass<-64
-res<-sqrt(mass)
-
-#applying getwd() function
-getwd()
-```
-
-In the fist example, the square root function takes `mass` object as input and finds the square root of its value. The result is then assigned to `res` variable. In our second example, `getwd()` is a function that outputs your current location within the file system. Although there is no input (many functions do not require arguments), parantheses are still required for a proper syntax in R.
-
-There are thousands of built-in functions in R. There are also help functions that you can use to find out what other function do and how to use them. The help appears in the bottom-right window of the RStudio.
-
-```
-### helpfunctions
-
-?plot
-help(mean)
-```
-The functionality of R is expanded by R packages that include functions not present in the default installation of R. When you need to use another package, do these 2 things
-
-```
 ### working with additional packages 
 
 #install package called "knitr"
@@ -188,6 +224,8 @@ Variables can hold values of various types. Most common data types:
 * logical
 * complex
 * ...
+#The two most common numeric classes used in R are integer and double (for double precision floating point numbers). 
+R automatically converts between these two classes when needed for mathematical purposes. 
 
 For example: What data type is stored in `score` variable?
 ```{r}
@@ -242,28 +280,30 @@ print(name)   # NA = missing value
 
 
 #### Data structures with multiple elements
-The small objects can be combined to build larger objects. Look at the gapminder dataset again. Our smallest objects can be used to represent a single element in the dataset, like individual year, or individual country, but what would be the simplest object that you can make with multiple elements?
+The small objects can be combined to build larger objects. 
+Look at the gapminder dataset again. 
+Our smallest objects can be used to represent a single element in the dataset, like individual year, or individual country, 
+but what would be the simplest object that you can make with multiple elements?
 
 * Vectors: collection of elements of the same data type
     * what part of our dataset can be represented by a vector?
-    * how to create: use concatinate function, c()
+    * how to create: use concatenate function, c()
     ```
     ###let's make a vector
     v<-c(1:3, 45)
     v
 
-    #examine object
-    typeof(v) # tells you the data type of vector elements
-
+    #examine the object
+   
     length(v) # what does this do?
 
     str(v)    # tells you the structure of the object VERY USEFUL
 
     #view
-    head(v, n=2)  #look at the first 2 elements
+    head(v, n=2) or head(v, 2) #look at the first 2 elements
 
     #what would `tail()` do?
-    tail(v, n=3)  #look at the first 3 elements
+    tail(v, n=3)  #look at the last 3 elements
 
     #manipulate
     v <- c(v,56)  #add element to vector
@@ -272,11 +312,13 @@ The small objects can be combined to build larger objects. Look at the gapminder
     v1 <- 2*v   # multiply each vector element by 2
     v1
 
-    # let's try to add vectors
+    # let's try to add vector, let's add v1 and v2, let's create v2
     v2<-c(1:5)
     v3 <- v1+v2
     v3
 
+  #you can also create a character vector:
+  v4 <- c("Jane", "John", "Mary")
   
     # change data type
     v3 <- as.character(v3)  #also known as coersion
@@ -295,12 +337,15 @@ The small objects can be combined to build larger objects. Look at the gapminder
     * what part of our dataset can be represented by a vector?
     * to create: use factor()
     ```
-    ## 4 observations, the first one for male, other 3 for female
-    f <- factor(c("M","F","F","F")) 
-    str(f) # what are these numbers in the output?
-    typeof(f)   # factors are of integer data type! Levels are numbered in alphabetical order
+    ## let's look at our dataset gapminder.txt
+    ##Let's say continent is a category where there are different levels as in the name of the continents asia etc.
+    Let's create a factor continent with the names of the continent in our data
+    cont <- factor(c("asia","europe","america","africa", "oceania")) 
+    cont
+    str(cont) # what are these numbers in the output?
+    typeof(cont)   # integer # factors are of integer data type! Levels are numbered in alphabetical order
     #sometimes important to reorder levels
-    f <- factor(f, levels=c("M","F"))
+    cont <- factor(cont, levels=c("M","F"))
     str(f)
     ```
 
@@ -317,7 +362,7 @@ The small objects can be combined to build larger objects. Look at the gapminder
      **CHALLENGE 2.2** 
     
     ```
-    TASK: Try to create a list named 'myOrder' that contains the 
+    TASK: Try to create a list named 'myorder' that contains the 
     following data structures as list elements:
 
     -- Element 1 is a character vector of length 4 that 
@@ -325,12 +370,13 @@ The small objects can be combined to build larger objects. Look at the gapminder
     chicken, soup, salad, tea.
 
     -- Element 2 is a factor that describes menu items
-    as "liquid" or "solid".
+    as "liquid" or "solid" categories.
 
     -- Element 3 is a vector that records the cost of each menu item:
     4.99, 2.99, 3.29, 1.89.
 
     *Hint: Define your elements first, then create a list with them.
+    You will need c(), factor() and list() functions
     ```
     **CHALLENGE 2.2: Answer**
     
@@ -338,34 +384,42 @@ The small objects can be combined to build larger objects. Look at the gapminder
     > menuItems<-c("chicken", "soup", "salad", "tea")
     > menuType<-factor(c("solid", "liquid", "solid", "liquid"))
     > menuCost<-c(4.99, 2.99, 3.29, 1.89)
-    > myOrder<-list(menuItems, menuType, menuCost)
+    > myorder<-list(menuItems, menuType, menuCost)
     > ```
         
     Now apply the following functions to the list you created. Try to predict the output before you run the command.
-    * length(myOrder)
-    * str(myOrder)
-    * print(myOrder)
+    * length(myorder)
+    * str(myorder)
+    * print(myorder)
         
 * Data frames
     * Let's go back to gapminder dataset. Could you make an informative guess about how this data structure can be represented in R?
 
-    * Yes! It is a list of vectors of equal length, or a data frame. Data frames are extremely useful data structures as they represent table-like datasets. Let's look at our myOrder list to see if we can make data frame out of it. Is the list we just made suitable for a data frame? Yes, the elements of the list are vectors of equal size.
+    * Yes! It is a list of vectors of equal length, or a data frame. 
+    gapminder <- list(country <- c("afghan","albania"),continent <- c("asia","america"),year <- c(1952,1953))
+    str(gapminder)
+    Data frames are extremely useful data structures as they represent table-like datasets. 
+    Let's look at our myorder list to see if we can make data frame out of it. 
+    Is the list we just made suitable for a data frame? Yes, the elements of the list are vectors of equal size.
     
     Previously we used list() to combine our elements:
 
-    * `myOrder<-list(menuItems, menuType, menuCost)`
+    * `myorder<-list(menuItems, menuType, menuCost)`
     
-    Now let's combine with data.frame() function. How? Give it a different name, myOrder_df.
+    Now let's combine with data.frame() function. How? Give it a different name, myorder_df.
 
     ```
-    myOrder_df<-data.frame(menuItems, menuType, menuCost)
+    myorder_df<-data.frame(menuItems, menuType, menuCost)
     
     #now view it!
-    myOrder_df
-
+    myorder_df
+   #does it look like our gapminder data set?
     #and check with str()
-    #anything different compared to str(myOrder)
+    #anything different compared to str(myorder)
+    myorder
+    myorder_df
     #output? What is happening with data types? 
     
-    str(myOrder_df)
+    str(myorder_df)
+    dim(myorder_df)
     ```
